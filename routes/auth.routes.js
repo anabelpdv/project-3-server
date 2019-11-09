@@ -84,10 +84,10 @@ authRouter.post('/api/logout', (req,res,next)=>{
 
   console.log('################################## log out', req.user)
 req.logout();
-  req.session.destroy(function (err) {
-    res.clearCookie('connect.sid');
+  // req.session.destroy(function (err) {
+  //   res.clearCookie('connect.sid');
     res.json({ userDoc: null });  
-  });
+  // });
  // req.logout();
   
 })
