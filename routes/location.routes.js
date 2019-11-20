@@ -46,6 +46,18 @@ router.get('/api/locations', (req,res,next)=>{
 
 });
 
+router.get('/api/locations/:id', (req,res,next)=>{
+  Location
+          .findById(req.params.id)
+          .then(response=>{
+            res.status(200).json(response);
+          })
+          .catch(err=>{
+            next(err)
+          })
+
+});
+
 router.delete('/api/locations/:id', (req,res,next)=>{
   Location
           .findByIdAndRemove(req.params.id)
@@ -60,8 +72,6 @@ router.delete('/api/locations/:id', (req,res,next)=>{
 
 
 router.post('/api/locations/:id',(req,res,next)=>{
-  
-console.log('This my reqbody', req.body)
   Location
           .findByIdAndUpdate(req.params.id,req.body)
           .then(response=>{
