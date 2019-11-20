@@ -59,24 +59,13 @@ router.delete('/api/locations/:id', (req,res,next)=>{
 });
 
 
-router.put('/api/locations/:id', uploader.array('imageUrl',6),(req,res,next)=>{
+router.post('/api/locations/:id',(req,res,next)=>{
   
-  let imagesArray=[];
-  req.files.forEach(image=>{
-    imagesArray.push(image.secure_url)
-  })
-
-  const updatedLocation ={
-    title: req.body.title,
-    description: req.body.description,
-    lat:req.body.lat,
-    lng:req.body.lng,
-    imageUrl:imagesArray,
-  }
- 
+console.log('This my reqbody', req.body)
   Location
-          .findByIdAndUpdate(req.params.id,updatedLocation)
+          .findByIdAndUpdate(req.params.id,req.body)
           .then(response=>{
+            console.log('REQUETE DONE')
             res.status(200).json(response);
           })
           .catch(err=>{
