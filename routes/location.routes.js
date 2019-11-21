@@ -1,7 +1,5 @@
 const express = require('express');
-
 const router = express.Router();
-
 const Location = require('../models/Location');
 
 
@@ -37,6 +35,7 @@ router.get('/api/locations', (req,res,next)=>{
 
   Location
           .find({})
+          .populate('comments')
           .then(response=>{
             res.status(200).json(response);
           })

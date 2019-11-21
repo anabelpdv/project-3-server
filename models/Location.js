@@ -6,7 +6,8 @@ const locationSchema = new Schema ({
   description: {type: String},
   imageUrl:[{type:String}],
   lat: {type: Number},
-  lng: {type:Number} 
+  lng: {type:Number}, 
+  comments:[{type: Schema.Types.ObjectId, ref: 'Comment' }]
 },
 {
   timestamps: true,
