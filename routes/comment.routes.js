@@ -9,14 +9,7 @@ router.post("/api/comments", (req,res,next)=>{
     Comment
             .create(req.body)
             .then(comment=>{
-                  Location
-                          .findByIdAndUpdate(req.body.locationId,{ $push: { comments: comment } })
-                          .then(res=>{
-                            
-                          })
-                          .catch(err=>{
-                            next(err)
-                          })
+              console.log('Testing what is being populated',comment)
               res.status(200).json(comment);
             })
             .catch(err=>{
@@ -26,9 +19,11 @@ router.post("/api/comments", (req,res,next)=>{
 });
 
 
-router.get("/api/comments", (req,res,next)=>{
+router.get("/api/comments/:locationId", (req,res,next)=>{
+  console.log('this is the parameter im looking for',req.params.locationId)
   Comment
-          .find()
+          .find({location:req.params.locationId},{'content':1})
+          .populate('author')
           .then(response=>{
             res.status(200).json(response);
           })
